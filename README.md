@@ -63,3 +63,14 @@ uv run sniff formation --n 20 --p-track 0.0 0.0
   <br>
   <em>Figure 3: Consensus Protocol for noisy 2D agents forming a grid.</em>
 </p>
+
+### Running dynamic circle consensus
+```bash
+uv run sniff circle --n 30
+```
+
+<p align="center">
+  <img src="circle.png" width="400"/>
+  <br>
+  <em>Figure 4: Consensus Protocol for noisy 2D agents tracking a circle.</em>
+</p>

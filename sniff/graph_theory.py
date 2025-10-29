@@ -77,12 +77,6 @@ class Graph:
     def make_circle_formation_transform_2D(L, alpha, beta, p_track, formation_offsets) -> np.ndarray:
         """
         Takes a graph Laplacian L and 2D setpoint p.
-
-        Computes a transform matrix B and offset vector c from the stack of
-        all positions resulting from consensus with neighbors, setpoint attraction,
-        and formation positioning
-
-        pdot = Bp + c , p = [(x1,y1), ...., (xn, yn)]
         """
         N = L.shape[0]
         I2 = np.eye(2)
