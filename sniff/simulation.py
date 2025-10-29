@@ -138,3 +138,43 @@ class Simulate:
         coords = np.array(
             [[i*spacing, j*spacing] for i in range(side) for j in range(side)])
         return coords[:n]
+
+    def solve_consensus_formation_circle_tracking_w_GOE_noise(self, alpha=1, beta=1, center=(0.5, 0.5), radius=0.25, ang_vel=1.0, noise_strength=0.1, spacing=0.05):
+        """
+        Solves the consensus dynamics for converging to a 2D
+        setpoint and arranges agents into a formation
+        """
+        self.current_L_noisy = None
+        self.last_noise_update = -np.inf
+
+        n_agents = len(self.x0)//2
+        phase_offsets = np.linspace(0, 2*np.pi, n_agents, endpoint=False)
+
+        def circle(t):
+            p_targets = np.zeros((n_agents, 2))
+            for i in range(n_agents):
+                theta = ang_vel * t + phase_offsets[i]
+                p_targets[i, 0] = center[0] + radius * np.cos(theta)
+                p_targets[i, 1] = center[1] + radius * np.sin(theta)
+            return p_targets.flatten()
+
+        t_span = (0, self.T)
+        t_eval = np.linspace(*t_span, int(self.T/self.dT))
+
+        solution = solve_ivp(self._consensus_formation_2D_circle_w_GOE_noise,
+                             t_span,
+                             self.x0,
+                             t_eval=t_eval,
+                             method='RK45',
+                             args=(alpha, beta, circle, radius, noise_strength, spacing))
+
+        return solution
+
+    def _consensus_formation_2D_circle_w_GOE_noise(self, t, x, alpha, beta, circle, radius, noise_strength, spacing):
+        p_target = circle(t)
+        L_noisy = self._get_noisy_laplacian(t, noise_strength)
+        formation = radius * \
+            Simulate.generate_formation(L_noisy.shape[0], spacing)
+        B, c = Graph.make_circle_formation_transform_2D(
+            L_noisy, alpha=alpha, beta=beta, p_track=p_target, formation_offsets=formation)
+        return B @ x + c
