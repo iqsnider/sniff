@@ -72,3 +72,61 @@ class Plot:
             plt.savefig(save, dpi=300, bbox_inches="tight")
         else:
             plt.show()
+
+    def plot_communication_graph(self, x0, A, save=None):
+        """
+        Plots the communication links between agents based on adjacency matrix A.
+
+        Parameters
+        ----------
+        x0 : np.ndarray
+            Initial positions of agents (n, 2)
+        A : np.ndarray
+            Adjacency matrix (n x n)
+        save : str, optional
+            Path to save the figure
+        """
+        n = x0.shape[0]
+        colors = plt.cm.viridis(np.linspace(0, 1, n))
+
+        plt.figure(figsize=(6, 6))
+
+        # Draw edges (connections)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if A[i, j] == 1:
+                    xi, yi = x0[i]
+                    xj, yj = x0[j]
+                    plt.plot(
+                        [xi, xj],
+                        [yi, yj],
+                        color="gray",
+                        lw=1.2,
+                        alpha=0.6,
+                        zorder=1
+                    )
+
+        # Draw nodes
+        for i, color in enumerate(colors):
+            plt.scatter(
+                x0[i, 0],
+                x0[i, 1],
+                color=color,
+                s=60,
+                edgecolor="k",
+                zorder=2,
+                label=f"agent {i+1}"
+            )
+
+        plt.title("Communication Graph", fontsize=13, pad=10)
+        plt.xlabel("x", fontsize=11)
+        plt.ylabel("y", fontsize=11)
+        plt.axis("equal")
+        plt.grid(alpha=0.3, linestyle="--")
+        plt.legend(frameon=False, fontsize=9, loc="best")
+        plt.tight_layout()
+
+        if save:
+            plt.savefig(save, dpi=300, bbox_inches="tight")
+        else:
+            plt.show()
