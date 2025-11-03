@@ -122,5 +122,16 @@ def circle(
     plotter.plot_2D_paths(p0, save)
 
 
+@app.command()
+def graph(
+    n: int = 5,
+    link: float = 1.0,
+    save: str = None
+):
+    graph = Graph(n)
+    A = graph.erdos_renyi_adj(link)
+    graph_plot = Plot.plot_graph_from_adj(A)
+
+
 if __name__ == "__main__":
     app()
