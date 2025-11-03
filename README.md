@@ -18,7 +18,7 @@ $$
 A Bernoulli random matrix is then formed by selecting a matrix of ones conditional upon a connection probability $p$:
 
 $$
-B = \mathbf{1}[U < p] \in \{0,1\}^{n \times n}, \quad 
+B = \mathbf{1}[U < p] \in \\{0,1\\}^{n \times n}, \quad 
 \text{with } 
 B_{ij} =
 \begin{cases}
