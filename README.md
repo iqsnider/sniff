@@ -7,21 +7,40 @@ Consensus protocol for a random graph of agents perturbed with Gaussian Orthogon
 ---
 
 ## Overview
-An Erdos-Renyi graph is used to make random undirected connections between network nodes. A connection is formed between nodes only if the probability threshold is satisfied. The basic graph is defined as follows,
+An Erdos–Renyi graph is used to make random undirected connections between network nodes.  
+A connection is formed between nodes only if the probability threshold is satisfied.  
+The basic graph is defined as follows:
+
 $$
-U = (U_{ij})_{i,j=1}^n, \quad \text{where} \quad U_{ij} \stackrel{\text{i.i.d.}}{\sim} \text{Unif}[0, 1)
+U = (U_{ij})_{i,j=1}^n, \quad \text{where } U_{ij} \stackrel{\text{i.i.d.}}{\sim} \text{Unif}[0, 1)
 $$
-A Bernoulli Random Matrix is then formed by selecting a matrix of ones conditional upon a connection probability $p$.
+
+A Bernoulli random matrix is then formed by selecting a matrix of ones conditional upon a connection probability \( p \):
+
 $$
-B = 1[U < p] \in \{0,1\}^{n \times n} \quad \text{with} \quad B_{ij} = \begin{cases} 1, & U_{ij} < p \\ 0, & U_{ij} > p\end{cases}
+B = \mathbf{1}[U < p] \in \{0,1\}^{n \times n}, \quad 
+\text{with } 
+B_{ij} =
+\begin{cases}
+1, & U_{ij} < p \\
+0, & U_{ij} \ge p
+\end{cases}
 $$
-To ensure that the matrix is *undirected* we first keep only the strict upper triangle section of the $B$ matrix by forming a matrix $C$ s.t.
+
+To ensure that the matrix is undirected, we first keep only the strict upper-triangular section of \( B \) by forming a matrix \( C \) such that:
+
 $$
-C_{ij} = \begin{cases} B_{ij}, & i < j \\ 0, & i \geq j \end{cases}
+C_{ij} =
+\begin{cases}
+B_{ij}, & i < j \\
+0, & i \ge j
+\end{cases}
 $$
-Then, the final undirected (and symmetric) adjacency matrix $A$ is formed by summing $C$ and its transpose,
+
+Then, the final undirected (and symmetric) adjacency matrix \( A \) is formed by summing \( C \) and its transpose:
+
 $$
-A = C + C^\intercal
+A = C + C^\mathsf{T}
 $$
 
 ## Installation (with uv)
