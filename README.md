@@ -5,8 +5,9 @@
 Consensus protocol for a random graph of agents perturbed with Gaussian Orthogonal Ensemble (GOE) noise.
 
 ---
-
 ## Overview
+---
+### Adjacency Matrix
 An Erdos–Renyi graph is used to make random undirected connections between network nodes.  
 A connection is formed between nodes only if the probability threshold is satisfied.  
 The basic graph is defined as follows:
@@ -41,6 +42,20 @@ Then, the final undirected (and symmetric) adjacency matrix $A$ is formed by sum
 
 $$
 A = C + C^\mathsf{T}
+$$
+
+
+### Graph Laplacian
+An adjacency matrix produced from an Erdos-Renyi graph will include undirected connections between nodes dependening a threshold probability. Some nodes will have more connections than others, so the graph Laplacian is used to model the difference in the communication of some nodes in relation to others. A graph Laplacian $L$ is produce from the difference of the degree matrix $D$ and the adjacency matrix $A$,
+
+$$
+L = D - A \quad \text{where } D = \text{diag}(d_1, d_2, ..., d_n) \quad \text{and } d_i = \sum_{j=1}^n A_{ij}
+$$
+
+The communication pressure modeled by the graph Laplacian will drive each node to the average state of its neighbors. So for some graph Laplacian $L$ and states $\mathbf{x}$ we produce the following consensus dynamics,
+
+$$
+\dot{\mathbf{x}} = -L \mathbf{x}
 $$
 
 ## Installation (with uv)
