@@ -4,19 +4,16 @@
 
 Consensus protocol for a random graph of agents perturbed with Gaussian Orthogonal Ensemble (GOE) noise.
 
----
 ## Overview
----
+
 ### Adjacency Matrix
-An Erdos–Renyi graph is used to make random undirected connections between network nodes.  
-A connection is formed between nodes only if the probability threshold is satisfied.  
-The basic graph is defined as follows:
+An Erdos–Renyi graph is used to make random undirected connections between network nodes. A connection is formed between nodes only if the probability threshold is satisfied. The basic graph is defined as follows,
 
 $$
 U = (U_{ij})_{i,j=1}^n, \quad \text{where } U_{ij} \stackrel{\text{i.i.d.}}{\sim} \text{Unif}[0, 1)
 $$
 
-A Bernoulli random matrix is then formed by selecting a matrix of ones conditional upon a connection probability $p$:
+A Bernoulli random matrix is then formed by selecting a matrix of ones conditional upon a connection probability $p$,
 
 $$
 B = \mathbf{1}[U < p] \in \\{0,1\\}^{n \times n}, \quad 
@@ -28,7 +25,7 @@ B_{ij} =
 \end{cases}
 $$
 
-To ensure that the matrix is undirected, we first keep only the strict upper-triangular section of $B$ by forming a matrix $C$ such that:
+To ensure that the matrix is undirected, we first keep only the strict upper-triangular section of $B$ by forming a matrix $C$ such that,
 
 $$
 C_{ij} =
@@ -38,7 +35,7 @@ B_{ij}, & i < j \\
 \end{cases}
 $$
 
-Then, the final undirected (and symmetric) adjacency matrix $A$ is formed by summing $C$ and its transpose:
+Then, the final undirected (and symmetric) adjacency matrix $A$ is formed by summing $C$ and its transpose,
 
 $$
 A = C + C^\mathsf{T}
