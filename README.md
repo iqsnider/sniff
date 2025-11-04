@@ -43,7 +43,7 @@ $$
 
 
 ### Graph Laplacian
-An adjacency matrix produced from an Erdos-Renyi graph will include undirected connections between nodes dependening a threshold probability. Some nodes will have more connections than others, so the graph Laplacian is used to model the difference in the communication of some nodes in relation to others. A graph Laplacian $L$ is produce from the difference of the degree matrix $D$ and the adjacency matrix $A$,
+An adjacency matrix produced from an Erdos-Renyi graph will include undirected connections between nodes depending on a threshold probability. Some nodes will have more connections than others, so the graph Laplacian is used to model the difference in the communication of some nodes in relation to others. A graph Laplacian $L$ is produce from the difference of the degree matrix $D$ and the adjacency matrix $A$,
 
 $$
 L = D - A \quad \text{where } D = \text{diag}(d_1, d_2, ..., d_n) \quad \text{and } d_i = \sum_{j=1}^n A_{ij}
@@ -54,6 +54,17 @@ The communication pressure modeled by the graph Laplacian will drive each node t
 $$
 \dot{\mathbf{x}} = -L \mathbf{x}
 $$
+
+### Setpoint Tracking
+For tracking a setpoint, each agent is represent by a position $p_i \in \mathbb{R}^n$. The fully stacked state vector for the system is then $\mathbf{p} = [p_1, p_2, ..., p_N]^\intercal \in \mathbb{R}^{N \times n}$. The system dynamics are then augmented to model the competing attraction to the setpoint and consensus coupling. For some setpoint $p_\text{track}$, the competing dynamics are modeled as follows,
+
+$$
+\dot{\mathbf{p}} = -\alpha(L \otimes I_n)\mathbf{p} - \beta(I_N \otimes I_n)\mathbf{p} + \beta(\mathbf{1}_N \otimes p_\text{track})
+$$
+
+where $\alpha$ is the consensus coupling strength, $\beta$ is the setpoint tracking strength, and $\otimes$ is the Kronecker product.
+
+### Injecting Communication Noise
 
 ## Installation (with uv)
 
