@@ -119,7 +119,11 @@ def circle(
         alpha=alpha, beta=beta, center=center, radius=radius, ang_vel=ang_vel, noise_strength=noise_strength, spacing=spacing)
 
     plotter = Plot(logs)
-    plotter.plot_communication_graph(x0, A, save)
+    if save is not None:
+        graph_save = save.split(".")[0] + "_graph"
+    else:
+        graph_save = save
+    plotter.plot_communication_graph(x0, A, graph_save)
     plotter.plot_2D_paths(p0, save)
 
 

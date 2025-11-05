@@ -66,6 +66,10 @@ where $\alpha$ is the consensus coupling strength, $\beta$ is the setpoint track
 
 ### Injecting Communication Noise
 
+
+### Gaussian Orthogonal Ensemble
+
+### Formations
 ## Installation (with uv)
 
 `sniff` uses [uv](https://github.com/astral-sh/uv), a fast Python package manager and environment builder.  
@@ -124,11 +128,11 @@ uv run sniff formation --n 20 --p-track 0.0 0.0
 
 ### Running dynamic circle consensus
 ```bash
-uv run sniff circle --n 30
+uv run sniff circle --n 20 --link 0.5 --alpha 0.1 --noise-strength 1
 ```
 
 <p align="center">
-  <img src="circle.png" width="400"/>
+  <img src="docs/assets/figures/circle.png" width="400"/>
   <br>
   <em>Figure 4: Consensus Protocol for noisy 2D agents tracking a circle.</em>
 </p>
