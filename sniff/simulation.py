@@ -173,8 +173,7 @@ class Simulate:
     def _consensus_formation_2D_circle_w_GOE_noise(self, t, x, alpha, beta, circle, radius, noise_strength, spacing):
         p_target = circle(t)
         L_noisy = self._get_noisy_laplacian(t, noise_strength)
-        formation = radius * \
-            Simulate.generate_formation(L_noisy.shape[0], spacing)
+        formation = Simulate.generate_formation(L_noisy.shape[0], spacing)
         B, c = Graph.make_circle_formation_transform_2D(
             L_noisy, alpha=alpha, beta=beta, p_track=p_target, formation_offsets=formation)
         return B @ x + c

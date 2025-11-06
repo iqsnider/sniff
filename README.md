@@ -65,14 +65,33 @@ $$
 where $\alpha$ is the consensus coupling strength, $\beta$ is the setpoint tracking strength, and $\otimes$ is the Kronecker product.
 
 ### Injecting Communication Noise
+Communication noise between agents by adding a noise term to the graph Laplacian. The system matrix of the consensus dynamics then becomes,
 
+$$
+L_\text{noisy} = L + \epsilon W
+$$
+
+where $W$ is the matrix term representing the noise between communicating agents and $\epsilon$ is the noise strength.
 
 ### Gaussian Orthogonal Ensemble
+Many types of noise can be applied to the consensus system. However, if we wish to conduct a tractable spectral analysis, an ensemble derived from Random Matrix Theory can provide a structured spectrum. The Gaussian Orthogonal Ensemble (GOE) has real and symmetric entries drawn from a Gaussian. Perturbing the graph Laplacian with a GOE ensures that the noisy Laplacian remains diagonalizable with real eigenvalues. The GOE matrix is constructed from an $n \times n$ $Z$ matrix with i.i.d. standard normal entries. The matrix $Z$ is then symmetrized,
+
+$$
+W = \frac{1}{2}(Z + Z^\intercal)
+$$
+
+The canonical GOE used in spectral analysis requires the diagonal elements to have a variance of 1 and the off-diagonal elements to have a variance of 2. The resulting matrix then obeys the Wigner Semicircle Law, that is,
+
+$$
+W_{ij} = W_{ji} \sim \mathcal{N}(0,1), for i \neq j \quad \text{and } W_{ii} \sim \mathcal{N}(0,2)
+$$
+
+The GOE noise can then be applied to the Laplacian producing the previously discussed perturbed system.
 
 ### Formations
 ## Installation (with uv)
 
-`sniff` uses [uv](https://github.com/astral-sh/uv), a fast Python package manager and environment builder.  
+`sniff` uses [uv](https://github.com/astral-sh/uv), a fast Python package manager and environment builder.
 You **don’t** need to manually activate virtual environments.
 
 ### 1. Clone the repository
