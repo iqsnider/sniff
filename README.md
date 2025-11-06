@@ -43,7 +43,7 @@ $$
 
 
 ### Graph Laplacian
-An adjacency matrix produced from an Erdos-Renyi graph will include undirected connections between nodes depending on a threshold probability. Some nodes will have more connections than others, so the graph Laplacian is used to model the difference in the communication of some nodes in relation to others. A graph Laplacian $L$ is produce from the difference of the degree matrix $D$ and the adjacency matrix $A$,
+An adjacency matrix produced from an Erdos-Renyi graph will include undirected connections between nodes depending on a threshold probability. Some nodes will have more connections than others, so the graph Laplacian is used to model the difference in the communication of some nodes in relation to others. A graph Laplacian $L$ is produced from the difference of the degree matrix $D$ and the adjacency matrix $A$,
 
 $$
 L = D - A \quad \text{where } D = \text{diag}(d_1, d_2, ..., d_n) \quad \text{and } d_i = \sum_{j=1}^n A_{ij}
@@ -56,7 +56,7 @@ $$
 $$
 
 ### Setpoint Tracking
-For tracking a setpoint, each agent is represent by a position $p_i \in \mathbb{R}^n$. The fully stacked state vector for the system is then $\mathbf{p} = [p_1, p_2, ..., p_N]^\intercal \in \mathbb{R}^{N \times n}$. The system dynamics are then augmented to model the competing attraction to the setpoint and consensus coupling. For some setpoint $p_\text{track}$, the competing dynamics are modeled as follows,
+For tracking a setpoint, each agent is represent by a position $p_i \in \mathbb{R}^n$. The fully stacked state vector for the system is then $\mathbf{p} = [p_1, p_2, ..., p_N]^\intercal \in \mathbb{R}^{N \times n}$. The system dynamics are then augmented to model the competing attraction to the setpoint and consensus coupling. For some setpoint $p_\text{track}$, the competing dynamics are modeled as an affine linear system,
 
 $$
 \dot{\mathbf{p}} = -\alpha(L \otimes I_n)\mathbf{p} - \beta(I_N \otimes I_n)\mathbf{p} + \beta(\mathbf{1}_N \otimes p_\text{track})
@@ -89,6 +89,18 @@ $$
 The GOE noise can then be applied to the Laplacian producing the previously discussed perturbed system.
 
 ### Formations
+We can embed a structured outcome directly into the concensus protocol. A relative geometric arrangement can be encoded in the system by assigning each agent an offset vector $d_i \in \mathbb{R}^n$. The desired offset matrix is then,
+
+$$
+D = \begin{bmatrix}d_1 \\ d_2 \\ \vdots \\ d_N \end{bmatrix}
+$$
+
+The absolute formation is then a combination of the formation and the setpoint $D + (\mathbf{1}_N \otimes p_\text{track})$. The combined affine system with formation and setpoint tracking is then,
+
+$$
+\dot{\mathbf{p}} = -\alpha(L \otimes I_n)\mathbf{p} - \beta(I_N \otimes I_n)\mathbf{p} + \alpha (L \otimes I_n)D + \beta(\mathbf{1}_N \otimes p_\text{track})
+$$
+
 ## Installation (with uv)
 
 `sniff` uses [uv](https://github.com/astral-sh/uv), a fast Python package manager and environment builder.
