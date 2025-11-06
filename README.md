@@ -83,7 +83,7 @@ $$
 The canonical GOE used in spectral analysis requires the diagonal elements to have a variance of 1 and the off-diagonal elements to have a variance of 2. The resulting matrix then obeys the Wigner Semicircle Law, that is,
 
 $$
-W_{ij} = W_{ji} \sim \mathcal{N}(0,1), for i \neq j \quad \text{and } W_{ii} \sim \mathcal{N}(0,2)
+W_{ij} = W_{ji} \sim \mathcal{N}(0,1), \quad \text{for } i \neq j \quad \text{and } W_{ii} \sim \mathcal{N}(0,2)
 $$
 
 The GOE noise can then be applied to the Laplacian producing the previously discussed perturbed system.
