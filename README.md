@@ -92,7 +92,12 @@ The GOE noise can then be applied to the Laplacian producing the previously disc
 We can embed a structured outcome directly into the concensus protocol. A relative geometric arrangement can be encoded in the system by assigning each agent an offset vector $d_i \in \mathbb{R}^n$. The desired offset matrix is then,
 
 $$
-D = \begin{bmatrix}d_1 \\ d_2 \\ \vdots \\ d_N \end{bmatrix}
+D = \begin{bmatrix}
+d_1 \\
+d_2 \\
+\vdots \\
+d_N
+\end{bmatrix}
 $$
 
 The absolute formation is then a combination of the formation and the setpoint $D + (\mathbf{1}_N \otimes p_\text{track})$. The combined affine system with formation and setpoint tracking is then,
