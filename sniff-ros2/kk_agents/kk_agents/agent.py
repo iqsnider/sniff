@@ -29,3 +29,23 @@ class Agent(Node):
 
         self.get_logger().info(f"agent starting at {self.pos} -> target {self.target}")
 
+    def update(self):
+        t = time.time()
+        dt = t - self.last_t
+        self.last_t = t
+
+        dp = -self.alpha*(self.pos - self.target)
+        self.pos += dp*dt
+
+        msg = Point()
+        msg.x, msg.y = float(self.pos[0]), float(self.pos[1])
+        msg.z = 0.0
+
+        self.pub.publish(msg)
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    mode = Agent()
+    rclpy.spin(node)
+    rclpy.shutdown()
