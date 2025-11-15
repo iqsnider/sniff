@@ -46,6 +46,6 @@ class Agent(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    mode = Agent()
+    node = Agent()
     rclpy.spin(node)
     rclpy.shutdown()
