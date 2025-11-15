@@ -16,3 +16,5 @@ dependencies = [
 package = true
 [project.scripts]
 sniff = "sniff.scripts.run_protocol:app"
+[tool.pytest.ini_options]
+norecursedirs = ["sniff-ros2"]
