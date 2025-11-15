@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'agent = kk_agents.agent:main',
         ],
     },
 )

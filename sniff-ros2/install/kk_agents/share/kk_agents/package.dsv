@@ -1,0 +1,6 @@
+source;share/kk_agents/hook/pythonpath.ps1
+source;share/kk_agents/hook/pythonpath.dsv
+source;share/kk_agents/hook/pythonpath.sh
+source;share/kk_agents/hook/ament_prefix_path.ps1
+source;share/kk_agents/hook/ament_prefix_path.dsv
+source;share/kk_agents/hook/ament_prefix_path.sh
